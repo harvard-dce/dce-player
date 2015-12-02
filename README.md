@@ -3,29 +3,21 @@ dce-player
 
 Standalone DCE player.
 
-Installation
-------------
-
-    npm install dce-player
-
 Usage
 -----
 
-    var someFactory = require('dce-player');
-    var thing = someFactory();
-    thing.use();
+First, start the proxy test server from paella-matterhorn.
 
-Tests
------
+Then:
 
-Run tests with `make test`.
+    make run
 
 License
 -------
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Jim Kang
+Copyright (c) 2015 Harvard
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
