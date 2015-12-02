@@ -1,0 +1,389 @@
+/*** File: paella-matterhorn/plugins/edu.harvard.dce.infoButtonPlugin/dce_infobutton.less ***/
+.buttonPlugin.showInfoPluginButton {
+  background-position: -1300% 0%;
+}
+.buttonPluginPopUp.showInfoPluginButton {
+  right: 0px;
+  width: 13em;
+}
+.showInfoPluginButton {
+  color: white;
+  background-image: none;
+}
+.showInfoPluginButton .infoItemButton {
+  padding: 0em .25em 0em .25em;
+  font-size: 1em;
+}
+.showInfoPluginButton .infoItemButton:hover {
+  background-color: #555;
+  cursor: pointer;
+}
+/*** File: paella-matterhorn/plugins/es.upv.paella.matterhorn.descriptionPlugin/mh_description.less ***/
+.showMHDescriptionTabBarLeft {
+  display: inline-block;
+  width: 50%;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+.showMHDescriptionTabBarRight {
+  display: inline-block;
+  width: 50%;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+.showMHDescriptionTabBarElement {
+  color: black;
+  margin-bottom: 2px;
+}
+.showMHDescriptionTabBarValue {
+  margin-left: 3px;
+  color: grey;
+}
+.showMHDescriptionTabBarValue a {
+  color: gray;
+}
+/*** File: paella-matterhorn/plugins/es.upv.paella.matterhorn.downloadsPlugin/mh_downloads.less ***/
+.downloadsTabBarContainer {
+  margin-bottom: 9px;
+}
+.downloadsLinkItem {
+  color: black;
+}
+.downloadsLinkItem:focus,
+.downloadsLinkItem:hover {
+  color: black;
+}
+/*
+.downloadLinkText {
+}
+.downloadLinkText.TypeFile {
+}
+.downloadLinkText.TypeFile.Video {
+}
+.downloadLinkText.TypeFile.Audio {
+}
+*/
+.downloadLinkText.Track {
+  font-weight: bold;
+}
+.downloadLinkText.Resolution {
+  color: green;
+}
+.downloadLinkText.MIMEType {
+  color: gray;
+}
+/* CSS for the editor plugin */
+.downloadsEditorTabBarContainer {
+  position: absolute;
+  overflow: auto;
+  bottom: 123px;
+  top: 65px;
+  left: 10;
+  right: 10;
+  box-shadow: inset 0 0 10 2px rgba(0, 0, 0, 0.39);
+  border-radius: 7px;
+  padding-left: 13px;
+}
+.downloadsEditorTabBarContainer a,
+.downloadsEditorTabBarContainer a:visited {
+  color: #c8c8c8;
+}
+.downloadsEditorTabBarContainer .downloadLinkText.TypeFile {
+  display: none;
+}
+.downloadsEditorTabBarContainer .downloadLinkText.MIMEType {
+  color: #d5a9a9;
+}
+.downloadsEditorTabBarContainer .downloadLinkText.Resolution {
+  color: #bff3b6;
+}
+/*** File: paella-matterhorn/plugins/es.upv.paella.matterhorn.editor.SingleVideoExportEditorPlugin/mh_single_video_export.less ***/
+.typeahead,
+.tt-query,
+.tt-hint {
+  width: 235px;
+  height: 30;
+  padding: 8px 12px;
+  font-size: 24px;
+  line-height: 30;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  outline: none;
+}
+.typeahead {
+  background-color: #fff;
+}
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.tt-hint {
+  color: #999;
+}
+.tt-dropdown-menu {
+  width: 235px;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10 rgba(0, 0, 0, 0.2);
+}
+.tt-suggestion {
+  padding: 3px 20;
+  font-size: 18px;
+  line-height: 24px;
+}
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+}
+.tt-suggestion p {
+  margin: 0;
+  color: #3a3838;
+}
+.tt-suggestion strong {
+  color: #1cbb4c;
+}
+#SingleVideoExportEditorTabBarRoot input {
+  width: 235px;
+  background-color: #fff;
+}
+#SingleVideoExportEditorTabBarRoot,
+#SingleVideoExportEditorTabBarRoot_InProgress,
+#SingleVideoExportEditorTabBarRoot_ToProcess {
+  margin-right: 5px;
+  margin-top: 20;
+  line-height: 16px;
+}
+/*** File: paella-matterhorn/plugins/es.upv.paella.matterhorn.editor.multipleVideoExportEditorPlugin/mh_multiple_video_export.less ***/
+.typeahead,
+.tt-query,
+.tt-hint {
+  width: 235px;
+  height: 30px;
+  padding: 8px 12px;
+  font-size: 24px;
+  line-height: 30px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  outline: none;
+}
+.typeahead {
+  background-color: #fff;
+}
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.tt-hint {
+  color: #999;
+}
+.tt-dropdown-menu {
+  width: 235px;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+}
+.tt-suggestion p {
+  margin: 0;
+  color: #3a3838;
+}
+.tt-suggestion strong {
+  color: #1cbb4c;
+}
+#MultipleVideoExportEditorTabBarRoot input {
+  width: 235px;
+  background-color: #fff;
+}
+#MultipleVideoExportEditorTabBarRoot,
+#MultipleVideoExportEditorTabBarRoot_InProgress,
+#MultipleVideoExportEditorTabBarRoot_ToProcess {
+  margin-right: 5px;
+  margin-top: 20px;
+  line-height: 16px;
+}
+/*** File: paella-matterhorn/plugins/es.upv.paella.matterhorn.episodesFromSeries/mh_episodes_from_serie.less ***/
+#episodesFromSerie {
+  width: 600px;
+  /*	min-width: 600px; */
+}
+.episodesFromSerieTitle {
+  font-family: sans-serif;
+  font-size: 1.5em;
+  /* color: #2D8F8B; #DCE Harvard Blue */
+  color: #0f6b8f;
+  margin-bottom: 5px;
+}
+.episodesFromSerieTitle_Bold {
+  font-weight: bold;
+}
+.episodesFromSerieListing {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.episodesFromSerieListing .recordings_header {
+  display: none;
+}
+.episodesFromSerieListing .recordings_entry_preview_container {
+  width: 120px;
+  display: inline-block;
+}
+.episodesFromSerieListing .recordings_entry_text_container {
+  font-size: 12px;
+  display: inline-block;
+}
+.episodesFromSerieListing .recordings_entry {
+  min-height: 95px;
+}
+.episodesFromSerieListing .recordings_entry.even_entry {
+  background-color: #eff7f9;
+}
+.episodesFromSerieListing .recordings_entry.odd_entry {
+  background-color: #f7fbfc;
+}
+.episodesFromSerieListing .recordings_entry.pendent.even_entry,
+.episodesFromSerieListing .recordings_entry.pendent.odd_entry {
+  background-color: #ffcc66;
+}
+.episodesFromSerieListing .recordings_entry.unpublished.even_entry,
+.episodesFromSerieListing .recordings_entry.unpublished.odd_entry {
+  background-color: #ffa5a1;
+}
+.episodesFromSerieListing .recordings_entry:hover {
+  background-color: #f3dea8;
+  cursor: pointer;
+}
+.episodesFromSerieListing .recordings_entry:focus {
+  background-color: #f3dea8;
+}
+/*** File: paella-matterhorn/plugins/es.upv.paella.matterhorn.publishPlugin/mh_publish.less ***/
+.publishVideoNotPublished {
+  background-color: #ffcc66;
+  color: #174B49;
+  text-align: center;
+  font-size: 22px;
+  -webkit-border-radius: 22px 20 20 23px;
+  -moz-border-radius: 22px 20 20 23px;
+  border-radius: 22px 20 20 23px;
+  padding: 5px 0 5px 0;
+}
+/*** File: paella-matterhorn/plugins/es.upv.paella.matterhorn.searchPlugin/mh_search.less ***/
+.searchTabBarSearchBar {
+  display: block;
+  height: 42px;
+}
+.searchTabBarSearchBar .searchBar {
+  float: left;
+}
+.searchTabBarSearchBar .relevanceInfo {
+  float: right;
+  margin: 5px 10;
+  text-align: center;
+  margin-left: 1px;
+  margin-right: 1px;
+  border: 0 solid black;
+  display: none;
+}
+.searchTabBarSearchBar .relevanceInfo .text {
+  display: inline;
+}
+.searchTabBarSearchBar .relevanceInfo .lt30 {
+  display: inline;
+  background-color: #C0C0C0;
+}
+.searchTabBarSearchBar .relevanceInfo .lt70 {
+  display: inline;
+  background-color: #ADD8E6;
+}
+.searchTabBarSearchBar .relevanceInfo .gt70 {
+  display: inline;
+  background-color: #90EE90;
+}
+.searchTabBarLoading {
+  background-image: url("../images/pluginloading.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 10;
+  width: 100%;
+  height: 11px;
+  display: block;
+}
+.searchTabBarResultEntry {
+  padding: 2px 5px 2px 5px;
+}
+.searchTabBarResultEntry:hover {
+  background-color: #f3dea8;
+  cursor: pointer;
+}
+.searchTabBarResultEntry:focus {
+  background-color: #f3dea8;
+  cursor: pointer;
+}
+.searchTabBarResultEntryPreview {
+  display: inline-block;
+  width: 15%;
+}
+.searchTabBarResultEntryPreview img {
+  width: 100%;
+}
+.searchTabBarResultEntryText {
+  display: inline-block;
+  width: 80%;
+  vertical-align: top;
+  padding: 10 0 0 5px;
+}
+.searchTabBarResultEntryText .time {
+  color: #09acc2;
+}
+.searchTabBarResultEntryText a {
+  color: black;
+}
+.none_relevance {
+  display: none;
+}
+.low_relevance {
+  background-color: #c0c0c0;
+}
+.medium_relevance {
+  background-color: #add8e6;
+}
+.high_relevance {
+  background-color: #90ee90;
+}
