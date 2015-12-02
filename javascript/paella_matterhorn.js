@@ -2,6 +2,8 @@
 paella.matterhorn = {};
 
 
+var engageURL = 'https://localhost:3000';
+
 // Patch to work with MH jetty server. 
 base.ajax.send = function(type,params,onSuccess,onFail) {
 	this.assertParams(params);
@@ -685,7 +687,7 @@ paella.dataDelegates.MHFootPrintsDataDelegate = Class.create(paella.DataDelegate
 
 function initPaellaMatterhornMe(onSuccess, onError) {
 
-	base.ajax.get({url:'/info/me.json'},
+	base.ajax.get({url: engageURL + '/info/me.json'},
 		function(data,contentType,code) {
 			paella.matterhorn.me = data;
 			if (onSuccess) onSuccess();
@@ -912,7 +914,7 @@ function loadPaella(containerId, onSuccess) {
 		},
 		function() {
 			if (paella.matterhorn.me.username == "anonymous") {
-				window.location.href = "auth.html?redirect=" + encodeURIComponent(window.location.href);
+				// window.location.href = "auth.html?redirect=" + encodeURIComponent(window.location.href);
 			}
 			else {
 				paella.messageBox.showError("Error loading video " + id);
@@ -932,7 +934,7 @@ function loadPaellaExtended(containerId, onSuccess) {
 		},
 		function() {
 			if (paella.matterhorn.me.username == "anonymous") {
-				window.location.href = "auth.html?redirect=" + encodeURIComponent(window.location.href);
+				// window.location.href = "auth.html?redirect=" + encodeURIComponent(window.location.href);
 			}
 			else {
 				paella.messageBox.showError("Error loading video " + id);
@@ -3062,7 +3064,7 @@ paella.plugins.PublishPlugin = Class.create(paella.EventDrivenPlugin,{
 			if ((data == false) || (data == "undefined") || (data == undefined)){
 				if (paella.initDelegate.initParams.accessControl.permissions.isAnonymous == true) {
 					paella.player.unloadAll(paella.dictionary.translate("This video is not published. If you are the author, Log In to publish it."));
-					window.href = "auth.html?redirect="+encodeURIComponent(window.href);
+					// window.href = "auth.html?redirect="+encodeURIComponent(window.href);
 				}
 				else {					
 					paella.player.unloadAll(paella.dictionary.translate("This video is not published."));
