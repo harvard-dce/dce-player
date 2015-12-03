@@ -2,14 +2,14 @@
 paella.matterhorn = {};
 
 
-var engageURL = 'https://localhost:3000';
+var engageBaseURL = 'https://localhost:3000';
 
 // Patch to work with MH jetty server. 
 base.ajax.send = function(type,params,onSuccess,onFail) {
 	this.assertParams(params);
 
 	var ajaxObj = jQuery.ajax({
-		url:params.url,
+		url: params.url,
 		data:params.params,
 		cache:false,
 		type:type
@@ -249,7 +249,10 @@ var MHVideoLoader = Class.create(paella.VideoLoader, {
               imageSourceHD.count = imageSourceHD.count +1;
                   
                   if (!(this.frameList[time])){
-                      this.frameList[time] = {id:'frame_'+time, mimetype:currentAttachment.mimetype, time:time, url:currentAttachment.url, thumb:currentAttachment.url};                  
+                      this.frameList[time] = {id:'frame_'+time, mimetype:currentAttachment.mimetype,
+                      time:time,
+                      url: engageBaseURL + currentAttachment.url,
+                      thumb: engageBaseURL + currentAttachment.url};                  
                   }
                   this.frameList[time].url = currentAttachment.url;
             }
@@ -261,7 +264,10 @@ var MHVideoLoader = Class.create(paella.VideoLoader, {
               imageSource.count = imageSource.count +1;
               
                   if (!(this.frameList[time])){
-                      this.frameList[time] = {id:'frame_'+time, mimetype:currentAttachment.mimetype, time:time, url:currentAttachment.url, thumb:currentAttachment.url};                  
+                      this.frameList[time] = {id:'frame_'+time, mimetype:currentAttachment.mimetype, time:time,
+                      url: engageBaseURL + currentAttachment.url,
+                      thumb: engageBaseURL + currentAttachment.url
+                    };                  
                   }
                   this.frameList[time].thumb = currentAttachment.url;
             }
@@ -307,7 +313,7 @@ var MHVideoLoader = Class.create(paella.VideoLoader, {
 paella.dataDelegates.MHAnnotationServiceDefaultDataDelegate = Class.create(paella.DataDelegate,{
 	read:function(context,params,onSuccess) {
 		var episodeId = params.id;
-		paella.ajax.get({url: '/annotation/annotations.json', params: {episode: episodeId, type: "paella/"+context}},	
+		paella.ajax.get({url: engageBaseURL + '/annotation/annotations.json', params: {episode: episodeId, type: "paella/"+context}},	
 			function(data, contentType, returnCode) { 
  				var annotations = data.annotations.annotation;
 				if (!(annotations instanceof Array)) { annotations = [annotations]; }
@@ -337,14 +343,14 @@ paella.dataDelegates.MHAnnotationServiceDefaultDataDelegate = Class.create(paell
 		var episodeId = params.id;
 		if (typeof(value)=='object') value = JSON.stringify(value);
 
-		paella.ajax.get({url: '/annotation/annotations.json', params: {episode: episodeId, type: "paella/"+context}},	
+		paella.ajax.get({url: engageBaseURL + '/annotation/annotations.json', params: {episode: episodeId, type: "paella/"+context}},	
 			function(data, contentType, returnCode) { 
 				var annotations = data.annotations.annotation;
 				if (annotations == undefined) {annotations = [];}
 				if (!(annotations instanceof Array)) { annotations = [annotations]; }
 				
 				if (annotations.length == 0 ) {
-					paella.ajax.put({ url: '/annotation/',
+					paella.ajax.put({ url: engageBaseURL + '/annotation/',
 						params: {
 							episode: episodeId, 
 							type: 'paella/' + context,
@@ -357,7 +363,7 @@ paella.dataDelegates.MHAnnotationServiceDefaultDataDelegate = Class.create(paell
 				}
 				else if (annotations.length == 1 ) {
 					var annotationId = annotations[0].annotationId;
-					paella.ajax.put({ url: '/annotation/'+ annotationId, params: { value: value }},	
+					paella.ajax.put({ url: engageBaseURL + '/annotation/'+ annotationId, params: { value: value }},	
 						function(data, contentType, returnCode) { onSuccess({}, true); },
 						function(data, contentType, returnCode) { onSuccess({}, false); }
 					);
@@ -380,7 +386,7 @@ paella.dataDelegates.MHAnnotationServiceDefaultDataDelegate = Class.create(paell
 	remove:function(context,params,onSuccess) {
 		var episodeId = params.id;
 
-		paella.ajax.get({url: '/annotation/annotations.json', params: {episode: episodeId, type: "paella/"+context}},	
+		paella.ajax.get({url: engageBaseURL + '/annotation/annotations.json', params: {episode: episodeId, type: "paella/"+context}},	
 			function(data, contentType, returnCode) {
  				var annotations = data.annotations.annotation;
  				if(annotations) {
@@ -388,7 +394,7 @@ paella.dataDelegates.MHAnnotationServiceDefaultDataDelegate = Class.create(paell
 					var asyncLoader = new paella.AsyncLoader();
 					for ( var i=0; i< annotations.length; ++i) {
 						var annotationId = data.annotations.annotation.annotationId;
-						asyncLoader.addCallback(new paella.JSONCallback({url:'/annotation/'+annotationId}, "DELETE"));
+						asyncLoader.addCallback(new paella.JSONCallback({url: engageBaseURL + '/annotation/'+annotationId}, "DELETE"));
 					}
 					asyncLoader.load(function(){ if (onSuccess) { onSuccess({}, true); } }, function() { onSuccess({}, false); });
 				}
@@ -604,7 +610,7 @@ paella.dataDelegates.MHCaptionsDataDelegate = Class.create(paella.DataDelegate,{
 				captionsFound = true;
 				
 				// Load Captions!
-				paella.ajax.get({url: catalog.url},	
+				paella.ajax.get({url: engageBaseURL + catalog.url},	
 					function(data, contentType, returnCode, dataRaw) {
 					
 						var parser = new paella.matterhorn.DFXPParser();
@@ -638,7 +644,7 @@ paella.dataDelegates.MHFootPrintsDataDelegate = Class.create(paella.DataDelegate
 	read:function(context,params,onSuccess) {
 		var episodeId = params.id;
 		
-		paella.ajax.get({url: '/usertracking/footprint.json', params: {id: episodeId}},	
+		paella.ajax.get({url: engageBaseURL + '/usertracking/footprint.json', params: {id: episodeId}},	
 			function(data, contentType, returnCode) { 				
 				if ((returnCode == 200) && (contentType == 'application/json')) {
 					var footPrintsData = data.footprints.footprint;
@@ -662,7 +668,7 @@ paella.dataDelegates.MHFootPrintsDataDelegate = Class.create(paella.DataDelegate
 		var episodeId = params.id;
 		// #DCE correct js syntax on reserved term: 'in'
 		var inpoint = value['in'];
-		paella.ajax.get({url: '/usertracking/', params: {
+		paella.ajax.get({url: engageBaseURL + '/usertracking/', params: {
 					_method: 'PUT',
 					id: episodeId,
 					type:'FOOTPRINT',
@@ -687,7 +693,7 @@ paella.dataDelegates.MHFootPrintsDataDelegate = Class.create(paella.DataDelegate
 
 function initPaellaMatterhornMe(onSuccess, onError) {
 
-	base.ajax.get({url: engageURL + '/info/me.json'},
+	base.ajax.get({url: engageBaseURL + '/info/me.json'},
 		function(data,contentType,code) {
 			paella.matterhorn.me = data;
 			if (onSuccess) onSuccess();
@@ -700,7 +706,7 @@ function initPaellaMatterhorn(episodeId, onSuccess, onError) {
 
 	initPaellaMatterhornMe(
 		function(){
-			base.ajax.get({url:'/search/episode.json', params:{'id': episodeId}},
+			base.ajax.get({url: engageBaseURL + '/search/episode.json', params:{'id': episodeId}},
 				function(data,contentType,code) {
 					//#DCE auth result check
 					var jsonData = data;
@@ -760,7 +766,10 @@ function initPaellaMatterhorn(episodeId, onSuccess, onError) {
 				 	    if (onError) onError();
 					}
 				},
-				function(data,contentType,code) { if (onError) onError(); }
+				function(data,contentType,code) {
+          debugger;
+          if (onError) onError(); 
+        }
 			);
 		},
 		function() { if (onError) onError(); }
@@ -797,6 +806,7 @@ var isHarvardDceAuth = function (jsonData) {
         // auth-results present, dealing with auth errors
         var authResult = jsonData[ 'dce-auth-results'];
         var returnStatus = authResult.dceReturnStatus;
+        debugger;
         if (("401" == returnStatus || "403" == returnStatus) && authResult.dceLocation) {
             window.location.replace(authResult.dceLocation);
         } else {
@@ -816,7 +826,7 @@ var isHarvardDceAuth = function (jsonData) {
 // This tranforms the series data into the expected upstream series format
 var searchSeriesToSeriesSeries = function (serie, onSuccess, onError) {
     base.ajax.get({
-        url: '/search/series.json',
+        url: engageBaseURL + '/search/series.json',
         params: {
             'id': serie
         }
@@ -907,14 +917,15 @@ function loadPaella(containerId, onSuccess) {
 	var initDelegate = new paella.matterhorn.InitDelegate({accessControl:new MHAccessControl(),videoLoader:new MHVideoLoader()});
 	var id = paella.utils.parameters.get('id');
 
-	initPaellaMatterhorn(id,
+	initPaellaMatterhorn(
+    id,
 		function() {
 			initPaellaEngage(containerId,initDelegate);
 			if (onSuccess) onSuccess();
 		},
 		function() {
 			if (paella.matterhorn.me.username == "anonymous") {
-				// window.location.href = "auth.html?redirect=" + encodeURIComponent(window.location.href);
+				window.location.href = "auth.html?redirect=" + encodeURIComponent(window.location.href);
 			}
 			else {
 				paella.messageBox.showError("Error loading video " + id);
@@ -934,7 +945,7 @@ function loadPaellaExtended(containerId, onSuccess) {
 		},
 		function() {
 			if (paella.matterhorn.me.username == "anonymous") {
-				// window.location.href = "auth.html?redirect=" + encodeURIComponent(window.location.href);
+				window.location.href = "auth.html?redirect=" + encodeURIComponent(window.location.href);
 			}
 			else {
 				paella.messageBox.showError("Error loading video " + id);
@@ -1036,7 +1047,7 @@ paella.matterhorn.SearchEpisode = Class.create({
 
 		// loading results
 		thisClass.setLoading(true);
-		paella.ajax.get({url:'/search/episode.json', params:params},
+		paella.ajax.get({url: engageBaseURL + '/search/episode.json', params:params},
 			function(data, contentType, returnCode, dataRaw) {
 				thisClass.processSearchResults(data, params, domElement, divNavigation);
 			},
@@ -2032,7 +2043,7 @@ paella.plugins.SingleVideoExportEditorPlugin = Class.create(paella.editor.TrackP
 			datumTokenizer: function(d) {return Bloodhound.tokenizers.whitespace(d.num); },
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url: '/series/series.json?q=%QUERY',
+				url: engageBaseURL + '/series/series.json?q=%QUERY',
 				filter: function(parsedResponse) {
 					return jQuery.map(parsedResponse.catalogs, function (serie){
 						var serieId = serie['http://purl.org/dc/terms/'].identifier[0].value;
@@ -2626,7 +2637,7 @@ paella.plugins.MultipleVideoExportEditorPlugin = Class.create(paella.editor.Trac
 			datumTokenizer: function(d) {return Bloodhound.tokenizers.whitespace(d.num); },
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url: '/series/series.json?q=%QUERY',
+				url: engageBaseURL + '/series/series.json?q=%QUERY',
 				filter: function(parsedResponse) {
 					return jQuery.map(parsedResponse.catalogs, function (serie){
 						var serieId = serie['http://purl.org/dc/terms/'].identifier[0].value;
@@ -3064,7 +3075,7 @@ paella.plugins.PublishPlugin = Class.create(paella.EventDrivenPlugin,{
 			if ((data == false) || (data == "undefined") || (data == undefined)){
 				if (paella.initDelegate.initParams.accessControl.permissions.isAnonymous == true) {
 					paella.player.unloadAll(paella.dictionary.translate("This video is not published. If you are the author, Log In to publish it."));
-					// window.href = "auth.html?redirect="+encodeURIComponent(window.href);
+					window.href = "auth.html?redirect="+encodeURIComponent(window.href);
 				}
 				else {					
 					paella.player.unloadAll(paella.dictionary.translate("This video is not published."));
@@ -3395,7 +3406,7 @@ paella.plugins.SearchPlugin  = Class.create(paella.TabBarPlugin,{
 		
 		
 		var segmentsAvailable = false;
-		paella.ajax.get({url:'/search/episode.json', params:{id:paella.matterhorn.episode.id, q:value, limit:1000}},
+		paella.ajax.get({url: engageBaseURL + '/search/episode.json', params:{id:paella.matterhorn.episode.id, q:value, limit:1000}},
 			function(data, contentType, returnCode) {
 				paella.debug.log("Searching episode="+paella.matterhorn.episode.id + " q="+value);
 
@@ -3491,7 +3502,7 @@ new (Class (paella.userTracking.SaverPlugIn, {
 	getName: function() { return "es.upv.paella.matterhorn.userTrackingSaverPlugIn"; },
 	
 	checkEnabled: function(onSuccess) {
-		paella.ajax.get({url:'/usertracking/detailenabled'},
+		paella.ajax.get({url: engageBaseURL + '/usertracking/detailenabled'},
 			function(data, contentType, returnCode) {
 				if (data == 'true') {
 					onSuccess(true); 					
@@ -3546,6 +3557,6 @@ new (Class (paella.userTracking.SaverPlugIn, {
 				break;
 		}	
 		//console.log(matterhornLog);
-		paella.ajax.get( {url: '/usertracking/', params: matterhornLog });			
+		paella.ajax.get( {url: engageBaseURL + '/usertracking/', params: matterhornLog });			
 	}
 }))();
